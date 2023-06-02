@@ -2,4 +2,18 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    
+    
+    <color name="french_gray">#BBC7CE</color>
+    <color name="combia_blue">#B9D6F2</color>
+    <color name="khaki">#BCAC9B</color>
+    <color name="charcoal">#2A3D45</color>
+    <color name="dan">#DDC9B4</color>
+    <color name="coyote">#7A6C5D</color>
+    <color name="baby_powder">#FFFFFC</color>
+    <color name="almond">#E5D4C0</color>
+    <color name="honey_dew">#C5DECD</color>
+    <color name="sea_salt">#FAFAFA</color>
+    <color name="nyanza">#CAF7E2</color>
 </resources>
