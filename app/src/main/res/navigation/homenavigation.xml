@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homenavigation"
+    app:startDestination="@id/loginactivity">
+
+    <fragment
+        android:id="@+id/loginactivity"
+        android:name="com.junrdev.kchat.fragments.loginactivity"
+        android:label="fragment_loginactivity"
+        tools:layout="@layout/fragment_loginactivity" >
+        <action
+            android:id="@+id/action_loginactivity_to_signupactivity"
+            app:destination="@id/signupactivity" />
+        <action
+            android:id="@+id/action_loginactivity_to_chatlist"
+            app:destination="@id/chatlist" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupactivity"
+        android:name="com.junrdev.kchat.fragments.signupactivity"
+        android:label="fragment_signupactivity"
+        tools:layout="@layout/fragment_signupactivity" >
+        <action
+            android:id="@+id/action_signupactivity_to_loginactivity"
+            app:destination="@id/loginactivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatlist"
+        android:name="com.junrdev.kchat.fragments.chatlist"
+        android:label="fragment_chatlist"
+        tools:layout="@layout/fragment_chatlist" >
+        <action
+            android:id="@+id/action_chatlist_to_conversationactivity"
+            app:destination="@id/conversationactivity" />
+        <action
+            android:id="@+id/action_chatlist_to_appsettings"
+            app:destination="@id/appsettings" />
+    </fragment>
+    <fragment
+        android:id="@+id/conversationactivity"
+        android:name="com.junrdev.kchat.fragments.conversationactivity"
+        android:label="fragment_conversationactivity"
+        tools:layout="@layout/fragment_conversationactivity" >
+        <action
+            android:id="@+id/action_conversationactivity_to_appsettings"
+            app:destination="@id/appsettings" />
+    </fragment>
+    <fragment
+        android:id="@+id/appsettings"
+        android:name="com.junrdev.kchat.fragments.appsettings"
+        android:label="fragment_appsettings"
+        tools:layout="@layout/fragment_appsettings" />
+</navigation>
