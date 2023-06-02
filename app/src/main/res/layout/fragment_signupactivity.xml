@@ -157,7 +157,7 @@
         android:id="@+id/signUpButton"/>
 
     <TextView
-        android:id="@+id/not_a_user_"
+        android:id="@+id/loginPrompt"
         android:layout_width="wrap_content"
         android:layout_height="23dp"
         android:layout_centerHorizontal="true"

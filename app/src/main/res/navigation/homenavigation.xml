@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/homenavigation"
-    app:startDestination="@id/signupactivity">
+    app:startDestination="@id/loginactivity">
 
     <fragment
         android:id="@+id/loginactivity"
@@ -21,11 +21,7 @@
         android:id="@+id/signupactivity"
         android:name="com.junrdev.kchat.fragments.signupactivity"
         android:label="fragment_signupactivity"
-        tools:layout="@layout/fragment_signupactivity" >
-        <action
-            android:id="@+id/action_signupactivity_to_loginactivity"
-            app:destination="@id/loginactivity" />
-    </fragment>
+        tools:layout="@layout/fragment_signupactivity" />
     <fragment
         android:id="@+id/chatlist"
         android:name="com.junrdev.kchat.fragments.chatlist"
