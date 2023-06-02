@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "649981162101",
+    "project_id": "androidapps-62ab4",
+    "storage_bucket": "androidapps-62ab4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649981162101:android:01791927c38120410cbe3c",
+        "android_client_info": {
+          "package_name": "com.junrdev.kchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "649981162101-cu6eblu2k396e19mtntisr1a35o0trtc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuvYRiKiAS8Z87izvcVspmDIf9L1Qb3jk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "649981162101-cu6eblu2k396e19mtntisr1a35o0trtc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
