@@ -3,10 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.loginactivity"
-
     android:background="#66635B"
-    >
+
+    tools:context=".fragments.loginactivity">
+
+    <include
+        layout="@layout/loading_background"
+        android:id="@+id/loadinglayout"/>
 
     <ImageView
         android:id="@+id/loginImg"
@@ -36,7 +39,6 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:textColor="@color/charcoal"
                 android:id="@+id/loginEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,8 +46,9 @@
                 android:layout_marginEnd="40dp"
                 android:fontFamily="@font/poppinsregular"
                 android:hint="email"
-                android:textAlignment="center"
                 android:inputType="textEmailAddress"
+                android:textAlignment="center"
+                android:textColor="@color/charcoal"
                 android:textSize="15sp" />
 
             <ImageView
@@ -88,8 +91,8 @@
                 android:hint="password"
                 android:inputType="textPassword"
                 android:textAlignment="center"
-                android:textSize="15sp"
-                android:textColor="@color/charcoal"/>
+                android:textColor="@color/charcoal"
+                android:textSize="15sp" />
 
             <ImageView
 
@@ -105,42 +108,39 @@
         android:id="@+id/forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="23dp"
-        android:text="forgot password"
         android:layout_below="@id/loginPasswordLayout"
-        android:lineHeight="22sp"
-        android:textColor="#FFFDF7"
-        android:fontFamily="@font/poppinsregular"
-        android:layout_marginTop="25dp"
         android:layout_marginStart="30dp"
-        />
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/poppinsregular"
+        android:lineHeight="22sp"
+        android:text="forgot password"
+        android:textColor="#FFFDF7" />
 
 
     <TextView
+        android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/forgotPassword"
+        android:layout_below="@id/loadinglayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/btnbackground"
         android:fontFamily="@font/poppinsbold"
         android:padding="13dp"
-        android:text="Login"
-        android:id="@+id/loginButton"/>
+        android:text="Login" />
 
     <TextView
         android:id="@+id/signUpPrompt"
         android:layout_width="wrap_content"
         android:layout_height="23dp"
+        android:layout_below="@id/loginButton"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Not a user? Register Now"
-        android:lineHeight="22sp"
-        android:textColor="#FFFDF7"
-        android:fontFamily="@font/poppinsregular"
-        android:layout_below="@id/loginButton"
         android:layout_marginTop="40dp"
-        />
-
+        android:fontFamily="@font/poppinsregular"
+        android:lineHeight="22sp"
+        android:text="Not a user? Register Now"
+        android:textColor="#FFFDF7" />
 
 
 </RelativeLayout>
