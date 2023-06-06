@@ -266,4 +266,13 @@
         android:text="Already a user? Login Now"
         android:textColor="#FFFDF7" />
 
+    <include
+        layout="@layout/loading_background"
+        android:id="@+id/signUpLoading"
+        android:layout_below="@id/signUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        />
+
 </RelativeLayout>
