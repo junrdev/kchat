@@ -1,17 +1,31 @@
 package com.junrdev.kchat.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.junrdev.kchat.R;
+import com.junrdev.kchat.adapter.HomeRecyclerChatListAdapter;
+import com.junrdev.kchat.commons.ChatItemClickHandler;
 import com.junrdev.kchat.databinding.FragmentChatlistBinding;
+import com.junrdev.kchat.model.User;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,17 +78,51 @@ public class chatlist extends Fragment {
 
     private FirebaseAuth auth;
 
+
+    private RecyclerView chatItemsRecycler;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        binding = FragmentChatlistBinding.inflate(inflater);
-        auth = FirebaseAuth.getInstance();
+        List<User> demoUsers = new ArrayList<User>();
 
-        binding.LogoutButton.setOnClickListener(v ->{
-            auth.signOut();
-            Navigation.findNavController(requireView()).popBackStack();
-        });
+        demoUsers.add(new User("admin@kchat.com", "kchatKing", "20.05.2023", UUID.randomUUID().toString(), "The admin of this thing", R.drawable.narutoicon));
+        demoUsers.add(new User("admin@kchat.com", "kchatKing", "20.05.2023", UUID.randomUUID().toString(), "The admin of this thing", R.drawable.narutoicon));
+        demoUsers.add(new User("admin@kchat.com", "kchatKing", "20.05.2023", UUID.randomUUID().toString(), "The admin of this thing", R.drawable.narutoicon));
+        demoUsers.add(new User("admin@kchat.com", "kchatKing", "20.05.2023", UUID.randomUUID().toString(), "The admin of this thing", R.drawable.narutoicon));
+        demoUsers.add(new User("admin@kchat.com", "kchatKing", "20.05.2023", UUID.randomUUID().toString(), "The admin of this thing", R.drawable.narutoicon));
+        demoUsers.add(new User("admin@kchat.com", "kchatKing", "20.05.2023", UUID.randomUUID().toString(), "The admin of this thing", R.drawable.narutoicon));
+        demoUsers.add(new User("admin@kchat.com", "kchatKing", "20.05.2023", UUID.randomUUID().toString(), "The admin of this thing", R.drawable.narutoicon));
+        demoUsers.add(new User("admin@kchat.com", "kchatKing", "20.05.2023", UUID.randomUUID().toString(), "The admin of this thing", R.drawable.narutoicon));
+
+
+        auth = FirebaseAuth.getInstance();
+        binding = FragmentChatlistBinding.inflate(inflater);
+
+
+        //setting custom toolbar
+        Toolbar toolbar = getActivity().findViewById(R.id.chatListToolBar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
+        Context context = binding.getRoot().getContext();
+
+        chatItemsRecycler = binding.chatItemRecycler;
+        chatItemsRecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+
+        chatItemsRecycler.setAdapter(new HomeRecyclerChatListAdapter(context, demoUsers, new ChatItemClickHandler() {
+            @Override
+            public void handleItemClicked(User user) {
+
+                //start activity
+                Toast.makeText(context, " " + user.getUserName(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        }));
 
         return binding.getRoot();
     }
