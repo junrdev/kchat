@@ -3,17 +3,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".fragments.chatlist">
+    tools:context=".fragments.chatlist"
+    android:background="@color/nyanza">
 
-
-    <Button
-        android:layout_width="wrap_content"
+    <!--    customized app bar-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/chatListToolBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LOgout"
+        android:layout_marginTop="-25dp"
+        android:background="@drawable/appbarbackground"
+        android:padding="7dp"
+        >
 
-        android:id="@+id/LogoutButton"
-        android:layout_centerInParent="true"
-        />
+
+
+            <RelativeLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="7dp"
+                >
+
+                <ImageView
+                    android:id="@+id/chatListLoggedUserImage"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    tools:src="@drawable/narutoicon" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_toEndOf="@id/chatListLoggedUserImage"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppinsregular"
+                        tools:text="Dead User"
+                        />
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppinsregular"
+                        tools:text="@string/content_description"
+                        />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="16dp"
+        android:id="@+id/chatItemRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chatListToolBar"
+        tools:listitem="@layout/chatitem"/>
 
 </RelativeLayout>
