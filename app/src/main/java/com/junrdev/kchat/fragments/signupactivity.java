@@ -8,16 +8,25 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.junrdev.kchat.R;
 import com.junrdev.kchat.databinding.FragmentSignupactivityBinding;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -83,7 +92,20 @@ public class signupactivity extends Fragment {
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-    private final Pattern PATTERN   =  Pattern.compile(EMAIL_PATTERN);
+    private final Pattern PATTERN = Pattern.compile(EMAIL_PATTERN);
+
+
+    //firebase config
+    private FirebaseAuth auth;
+    private FirebaseUser currentUser;
+
+
+    private Context context;
+
+    private LinearLayout signUpLoading;
+
+    private FirebaseDatabase database;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,10 +113,10 @@ public class signupactivity extends Fragment {
         binding = FragmentSignupactivityBinding.inflate(inflater);
 
         //fields initialization
-        username= binding.signUpName;
-        email= binding.signUpEmail;
-        password= binding.signUpPassword;
-        passwordConfirm= binding.signUpPasswordConfirm;
+        username = binding.signUpName;
+        email = binding.signUpEmail;
+        password = binding.signUpPassword;
+        passwordConfirm = binding.signUpPasswordConfirm;
 
         //error fields initialization
         emailError = binding.emailError;
@@ -102,83 +124,154 @@ public class signupactivity extends Fragment {
         passwordConfirmError = binding.passwordConfirmError;
         usernameError = binding.usernameError;
 
-        Context context = binding.getRoot().getContext();
+        context = binding.getRoot().getContext();
 
-        binding.signUpButton.setOnClickListener(v ->{
-           if(checkFields()){
+        //firebase
+        auth = FirebaseAuth.getInstance();
 
-           }
+        if(database == null)
+            database = FirebaseDatabase.getInstance();
+
+        database = FirebaseDatabase.getInstance();
+
+        signUpLoading = binding.signUpLoading.loginLoading;
+
+        signUpLoading.setVisibility(View.GONE);
+
+        binding.signUpButton.setOnClickListener(v -> {
+            if (checkFields()) {
+                signUpLoading.setVisibility(View.VISIBLE);
+
+                auth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(authres -> {
+
+                    if (authres.isSuccessful()) {
+                        currentUser = auth.getCurrentUser();
+                        String uid = currentUser.getUid();
+
+                        Log.d("UID", "onCreateView: " + uid);
+                        
+                        //post user data
+                        postData();
+                        
+                        //send verification email and logout
+                        sendverifEmail();
+                    } else {
+                        signUpLoading.setVisibility(View.GONE);
+                        Toast.makeText(context, "Failed to create account due to " + authres.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         });
 
-        binding.loginPrompt.setOnClickListener(v ->{
+        binding.loginPrompt.setOnClickListener(v -> {
             Navigation.findNavController(requireView()).popBackStack();
         });
         return binding.getRoot();
     }
 
+    private void postData() {
+
+        assert  currentUser != null;
+
+        Map<String, Object> user_data = new HashMap<>();
+
+        user_data.put("uid", currentUser.getUid());
+        user_data.put("email", currentUser.getEmail());
+        user_data.put("name", username.getText().toString());
+        user_data.put("dateJoined", new Date().toString());
+
+        database.getReference("users").setValue(user_data).addOnCompleteListener(v ->{
+            if (v.isSuccessful()){
+                Snackbar.make(requireView(), "Saved data", Snackbar.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Saved data", Toast.LENGTH_SHORT).show();
+            }else{
+                Snackbar.make(requireView(), "Failed to Saved data "+ v.getException().getMessage(), Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void sendverifEmail() {
+
+        currentUser.sendEmailVerification().addOnCompleteListener(v -> {
+            if (v.isSuccessful()) {
+                //back to login
+                auth.signOut();
+                signUpLoading.setVisibility(View.GONE);
+                Toast.makeText(context, "verify email to login ", Toast.LENGTH_SHORT).show();
+                Navigation.findNavController(requireView()).popBackStack();
+            } else {
+                //retry amd show error
+                signUpLoading.setVisibility(View.GONE);
+                Toast.makeText(context, "Failed to create account due to " + v.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                return;
+            }
+        });
+    }
+
     private boolean checkFields() {
 
         //check fields entered
-        if(TextUtils.isEmpty(username.getText())){
+        if (TextUtils.isEmpty(username.getText())) {
             usernameError.setVisibility(View.VISIBLE);
             usernameError.setText(R.string.username_required_error);
             return false;
-        }else
+        } else
             usernameError.setVisibility(View.GONE);
 
 
-        if(TextUtils.isEmpty(email.getText())){
+        if (TextUtils.isEmpty(email.getText())) {
             emailError.setVisibility(View.VISIBLE);
             emailError.setText(R.string.email_required_error);
             return false;
-        }else
+        } else
             emailError.setVisibility(View.GONE);
 
         //validate email format
-        if(!PATTERN.matcher(email.getText()).matches()){
+        if (!PATTERN.matcher(email.getText()).matches()) {
             emailError.setVisibility(View.VISIBLE);
             emailError.setText(R.string.invalid_email_error);
             return false;
-        }else
+        } else
             emailError.setVisibility(View.GONE);
 
-        if(TextUtils.isEmpty(password.getText())){
+        if (TextUtils.isEmpty(password.getText())) {
             passwordError.setVisibility(View.VISIBLE);
             passwordError.setText(R.string.password_missing_error);
             return false;
-        }else
+        } else
             passwordError.setVisibility(View.GONE);
 
 
-        if(TextUtils.isEmpty(passwordConfirm.getText())){
+        if (TextUtils.isEmpty(passwordConfirm.getText())) {
             passwordConfirmError.setVisibility(View.VISIBLE);
             passwordConfirmError.setText(R.string.password_confirmation_error);
             return false;
-        }else
+        } else
             passwordConfirmError.setVisibility(View.GONE);
 
 
         //validate password lengths and equality
-        if(password.getText().length() < 6){
+        if (password.getText().length() < 6) {
             passwordError.setVisibility(View.VISIBLE);
             passwordError.setText(R.string.short_password_error);
             return false;
-        }else
+        } else
             passwordError.setVisibility(View.GONE);
 
-        if(passwordConfirm.getText().length() < 6){
+        if (passwordConfirm.getText().length() < 6) {
             passwordConfirmError.setVisibility(View.VISIBLE);
             passwordConfirmError.setText(R.string.short_password_error);
             return false;
-        }else
+        } else
             passwordConfirmError.setVisibility(View.GONE);
 
         //equality of the two password
-        if (!Objects.equals(password.getText(), passwordConfirm.getText())){
+        if (!Objects.equals(password.getText().toString(), passwordConfirm.getText().toString())) {
             passwordConfirmError.setVisibility(View.VISIBLE);
             passwordConfirmError.setText(R.string.password_mismatch_error);
             return false;
-        }else
+        } else
             passwordConfirmError.setVisibility(View.GONE);
 
         passwordConfirmError.setText(R.string.fields_ok_message);
