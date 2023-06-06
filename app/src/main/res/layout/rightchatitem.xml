@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/rightChatBubbleCard"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_toStartOf="@id/rightChatImageIcon"
+        android:elevation="5dp"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="This is an example text from the right chat icon"
+                android:fontFamily="@font/poppinsregular"
+                android:textSize="13sp"
+
+                android:id="@+id/rightChatTextContent"
+                />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/rightChatImageIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+
+        tools:src="@drawable/narutoicon" />
+
+</RelativeLayout>
