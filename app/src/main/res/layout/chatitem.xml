@@ -1,55 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="5dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/combia_blue"
     app:cardCornerRadius="7dp"
-    app:cardBackgroundColor="@color/coyote">
+    android:id="@+id/chatItemCard">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/chatItemImage"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:id="@+id/chatItemImage"
             android:layout_alignParentStart="true"
-            android:padding="7dp"
-            android:layout_marginTop="15dp"
             android:layout_marginStart="18dp"
-            tools:src="@drawable/narutoicon"
-            />
+            android:layout_marginTop="15dp"
+            android:padding="7dp"
+            tools:src="@drawable/narutoicon" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/chatItemImage"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="30dp"
-            android:orientation="vertical"
-            android:layout_margin="7dp"
-            >
+            android:layout_margin="10dp"
+            android:layout_toEndOf="@id/chatItemImage"
+            android:orientation="vertical">
 
             <TextView
-                android:textAlignment="center"
+                android:id="@+id/chatItemUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsbold"
-                tools:text="Dead User"
-                />
+                android:textAlignment="center"
+                tools:text="Dead User" />
 
             <TextView
+                android:id="@+id/chatItemUserDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsregular"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                tools:text="Hello world, this is just a demo descriptionof this user item"
-                />
+                android:fontFamily="@font/poppinsregular"
+                tools:text="@string/content_description" />
 
 
         </LinearLayout>

@@ -2,4 +2,16 @@
     <string name="app_name">kchat</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="content_description">Hello world, this is just a demo description of this user item</string>
+
+<!--    custom errors-->
+    <string name="email_required_error">an email adress is required</string>
+    <string name="username_required_error">a username is required</string>
+    <string name="password_missing_error">provide a password</string>
+    <string name="password_confirmation_error">provide a password confirmation</string>
+    <string name="invalid_email_error">Invalid email format</string>
+    <string name="short_password_error">Provide a password that is greater or equal to 6 characters long</string>
+    <string name="password_mismatch_error">password mismatch</string>
+    <string name="fields_ok_message">Everything is ok, proceed.</string>
 </resources>
