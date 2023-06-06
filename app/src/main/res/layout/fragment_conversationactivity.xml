@@ -7,5 +7,61 @@
 
     tools:context=".fragments.conversationactivity">
 
+    <!--    customized app bar-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/singleChatToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-25dp"
+        android:background="@drawable/appbarbackground"
+        android:padding="7dp"
+        >
+
+
+
+        <RelativeLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+            >
+
+            <ImageView
+                android:id="@+id/singleChatUserImage"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                tools:src="@drawable/narutoicon" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@id/singleChatUserImage"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsregular"
+                    tools:text="Dead User"
+
+                    android:id="@+id/singleChatUserName"
+                    />
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsregular"
+                    tools:text="@string/content_description"
+                    android:id="@+id/singleChatUserDescription"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
 
 </LinearLayout>
