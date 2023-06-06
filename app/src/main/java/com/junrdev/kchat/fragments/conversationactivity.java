@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.junrdev.kchat.R;
+import com.junrdev.kchat.databinding.FragmentConversationactivityBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,10 +58,13 @@ public class conversationactivity extends Fragment {
         }
     }
 
+    private FragmentConversationactivityBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_conversationactivity, container, false);
+        binding = FragmentConversationactivityBinding.inflate(inflater);
+
+        return binding.getRoot();
     }
 }
