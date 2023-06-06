@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#66635B"
+    android:background="@color/coyote"
 
     tools:context=".fragments.signupactivity">
 
@@ -14,16 +14,17 @@
         android:layout_height="120dp"
 
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/narutoicon" />
 
     <LinearLayout
-        android:id="@+id/signUpEmailInput"
+
+        android:id="@+id/signUpUserNameInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/loginImg"
         android:layout_marginStart="-35dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/inputbackground"
         android:orientation="horizontal"
@@ -36,7 +37,61 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/signUpName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="51dp"
+                android:layout_marginEnd="40dp"
+                android:fontFamily="@font/poppinsregular"
+                android:hint="john doe"
+                android:inputType="textPersonName"
+                android:textAlignment="center"
                 android:textColor="@color/charcoal"
+                android:textSize="15sp" />
+
+            <ImageView
+
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:paddingTop="15dp"
+                android:src="@drawable/baseline_fingerprint_24"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+<!--    username error-->
+    <TextView
+        android:id="@+id/usernameError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_below="@id/signUpUserNameInput"
+        android:fontFamily="@font/poppinsregular"
+        tools:text="provide a valid name"
+        android:textColor="#C60202"
+        android:visibility="gone"/>
+
+
+<!--    email layout-->
+    <LinearLayout
+        android:id="@+id/signUpEmailInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signUpUserNameInput"
+        android:layout_marginStart="-35dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/inputbackground"
+        android:orientation="horizontal"
+        android:padding="10dp"
+
+        android:paddingStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
                 android:id="@+id/signUpEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,8 +99,9 @@
                 android:layout_marginEnd="40dp"
                 android:fontFamily="@font/poppinsregular"
                 android:hint="email"
-                android:textAlignment="center"
                 android:inputType="textEmailAddress"
+                android:textAlignment="center"
+                android:textColor="@color/charcoal"
                 android:textSize="15sp" />
 
             <ImageView
@@ -58,13 +114,27 @@
         </RelativeLayout>
     </LinearLayout>
 
+<!--    email error-->
+    <TextView
+        android:id="@+id/emailError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_below="@id/signUpEmailInput"
+        android:fontFamily="@font/poppinsregular"
+        tools:text="provide an email"
+        android:textColor="#C60202"
+        android:visibility="gone"
+        />
+
+
     <LinearLayout
         android:id="@+id/signUpPasswordLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/signUpEmailInput"
         android:layout_marginStart="-35dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/inputbackground"
         android:orientation="horizontal"
@@ -88,8 +158,8 @@
                 android:hint="password"
                 android:inputType="textPassword"
                 android:textAlignment="center"
-                android:textSize="15sp"
-                android:textColor="@color/charcoal"/>
+                android:textColor="@color/charcoal"
+                android:textSize="15sp" />
 
             <ImageView
 
@@ -101,13 +171,27 @@
         </RelativeLayout>
     </LinearLayout>
 
+<!--    password error-->
+    <TextView
+        android:id="@+id/passwordError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_below="@id/signUpPasswordLayout"
+        android:fontFamily="@font/poppinsregular"
+        tools:text="provide an password"
+        android:textColor="#C60202"
+        android:visibility="gone"
+        />
+
+
     <LinearLayout
         android:id="@+id/signUpPasswordLayoutConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/signUpPasswordLayout"
         android:layout_marginStart="-35dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/inputbackground"
         android:orientation="horizontal"
@@ -130,9 +214,8 @@
                 android:hint="password confirm"
                 android:inputType="textPassword"
                 android:textAlignment="center"
-                android:textSize="15sp"
                 android:textColor="@color/charcoal"
-                />
+                android:textSize="15sp" />
 
             <ImageView
 
@@ -144,7 +227,22 @@
         </RelativeLayout>
     </LinearLayout>
 
+<!--    password confirm error-->
     <TextView
+        android:id="@+id/passwordConfirmError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_below="@id/signUpPasswordLayoutConfirm"
+        android:fontFamily="@font/poppinsregular"
+        tools:text="provide an password"
+        android:textColor="#C60202"
+        android:visibility="gone"
+        />
+
+
+    <TextView
+        android:id="@+id/signUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/signUpPasswordLayoutConfirm"
@@ -153,21 +251,19 @@
         android:background="@drawable/btnbackground"
         android:fontFamily="@font/poppinsbold"
         android:padding="13dp"
-        android:text="Register"
-        android:id="@+id/signUpButton"/>
+        android:text="Register" />
 
     <TextView
         android:id="@+id/loginPrompt"
         android:layout_width="wrap_content"
         android:layout_height="23dp"
+        android:layout_below="@id/signUpButton"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Already a user? Login Now"
-        android:lineHeight="22sp"
-        android:textColor="#FFFDF7"
-        android:fontFamily="@font/poppinsregular"
-        android:layout_below="@id/signUpButton"
         android:layout_marginTop="20dp"
-        />
+        android:fontFamily="@font/poppinsregular"
+        android:lineHeight="22sp"
+        android:text="Already a user? Login Now"
+        android:textColor="#FFFDF7" />
 
 </RelativeLayout>
