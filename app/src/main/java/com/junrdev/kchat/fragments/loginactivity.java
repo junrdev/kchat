@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.junrdev.kchat.R;
 import com.junrdev.kchat.databinding.FragmentLoginactivityBinding;
+
+import java.util.regex.Pattern;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,6 +87,17 @@ public class loginactivity extends Fragment {
 
     private FirebaseUser currentUser;
 
+    //for errors
+    private TextView errorTextView;
+
+    //for email regex validation
+    private final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    private final Pattern PATTERN = Pattern.compile(EMAIL_PATTERN);
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -96,6 +110,7 @@ public class loginactivity extends Fragment {
         loginLoading = binding.loadinglayout.loginLoading;
 
         loginLoading.setVisibility(View.GONE);
+        errorTextView = binding.errorPoppup;
 
         if (currentUser != null) {
             loadHome();
@@ -103,10 +118,7 @@ public class loginactivity extends Fragment {
 
         binding.loginButton.setOnClickListener(v -> {
 
-            if (TextUtils.isEmpty(email.getText()) || TextUtils.isEmpty(password.getText()))
-                Toast.makeText(binding.getRoot().getContext(), "Provide all fields", Toast.LENGTH_SHORT).show();
-            else {
-
+            if (checkFields()){
                 loginLoading.setVisibility(View.VISIBLE);
                 firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -117,6 +129,11 @@ public class loginactivity extends Fragment {
                             currentUser = task.getResult().getUser();
                             loginLoading.setVisibility(View.GONE);
                             Navigation.findNavController(requireView()).navigate(R.id.action_loginactivity_to_chatlist);
+                        } else {
+                            loginLoading.setVisibility(View.GONE);
+                            errorTextView.setVisibility(View.VISIBLE);
+                            errorTextView.setText(task.getException().getMessage());
+
                         }
                     }
                 });
@@ -131,10 +148,37 @@ public class loginactivity extends Fragment {
         return binding.getRoot();
     }
 
+    private boolean checkFields() {
+
+        if (TextUtils.isEmpty(email.getText())) {
+            errorTextView.setVisibility(View.VISIBLE);
+            errorTextView.setText(R.string.email_required_error);
+            return false;
+        } else
+            errorTextView.setVisibility(View.GONE);
+
+        //validate email format
+        if (!PATTERN.matcher(email.getText()).matches()) {
+            errorTextView.setVisibility(View.VISIBLE);
+            errorTextView.setText(R.string.invalid_email_error);
+            return false;
+        } else
+            errorTextView.setVisibility(View.GONE);
+
+        if (TextUtils.isEmpty(password.getText())) {
+            errorTextView.setVisibility(View.VISIBLE);
+            errorTextView.setText(R.string.password_missing_error);
+            return false;
+        } else
+            errorTextView.setVisibility(View.GONE);
+
+        return true;
+    }
+
     private void loadHome() {
         Navigation.findNavController(requireView()).navigate(R.id.action_loginactivity_to_chatlist);
 
-        assert  getActivity() != null;
+        assert getActivity() != null;
         getActivity().finish();
     }
 
