@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/forgotPassword"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id="@+id/loginImg"
@@ -108,18 +108,31 @@
         </RelativeLayout>
     </LinearLayout>
 
+    <!--    forgot password-->
     <TextView
         android:id="@+id/forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="23dp"
-        android:layout_below="@id/loginPasswordLayout"
-        android:layout_marginStart="30dp"
+        android:layout_below="@id/errorPoppup"
+        android:layout_marginStart="27dp"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/poppinsregular"
         android:lineHeight="22sp"
         android:text="forgot password"
         android:textColor="#FFFDF7" />
 
+    <!--    error checking -->
+    <TextView
+        android:id="@+id/errorPoppup"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_below="@id/loginPasswordLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/poppinsregular"
+        android:textColor="#A3071A"
+        tools:text="@string/invalid_email_error"/>
 
     <TextView
         android:id="@+id/loginButton"

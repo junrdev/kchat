@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/sea_salt"
 
+    android:orientation="vertical"
     tools:context=".fragments.conversationactivity">
 
     <!--    customized app bar-->
@@ -14,17 +15,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="-25dp"
         android:background="@drawable/appbarbackground"
-        android:padding="7dp"
-        >
-
+        android:padding="7dp">
 
 
         <RelativeLayout
-            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="7dp"
-            >
+            android:layout_marginTop="30dp"
+            android:padding="7dp">
 
             <ImageView
                 android:id="@+id/singleChatUserImage"
@@ -40,22 +38,17 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppinsregular"
-                    tools:text="Dead User"
-
                     android:id="@+id/singleChatUserName"
-                    />
-
-                <TextView
-                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+
+                    android:layout_marginTop="12dp"
                     android:fontFamily="@font/poppinsregular"
-                    tools:text="@string/content_description"
-                    android:id="@+id/singleChatUserDescription"
-                    />
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:text="Dead User" />
+
 
             </LinearLayout>
 
@@ -63,5 +56,56 @@
     </androidx.appcompat.widget.Toolbar>
 
 
+    <RelativeLayout
+        android:id="@+id/chatItemsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/singleChatToolBar">
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/singleChatListRecycler"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+
+
+            tools:listitem="@layout/rightchatitem" />
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"
+        android:elevation="8dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:paddingEnd="15dp">
+
+            <EditText
+                android:id="@+id/singleChatInputText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/poppinsregular"
+                android:hint="Text message goes here" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/sendicon"
+                android:id="@+id/sendIconBtn"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

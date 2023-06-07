@@ -3,39 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
 
     <ImageView
         android:id="@+id/leftChatImageIcon"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_alignParentStart="true"
-        android:layout_margin="10dp"
 
-        tools:src="@drawable/narutoicon" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/narutoicon" />
 
     <androidx.cardview.widget.CardView
 
         android:id="@+id/leftChatBubbleCard"
-        android:layout_width="180dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:layout_toEndOf="@id/leftChatImageIcon"
         android:elevation="5dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        android:padding="5dp"
+        >
 
         <LinearLayout
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:layout_margin="15dp">
 
             <TextView
                 android:id="@+id/leftChatTextContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsregular"
-                android:textSize="13sp"
+                android:textSize="16sp"
 
                 tools:text="This is an example text from the left chat icon" />
 

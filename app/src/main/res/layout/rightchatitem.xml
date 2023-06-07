@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    >
+    android:layout_margin="10dp">
 
     <androidx.cardview.widget.CardView
 
         android:id="@+id/rightChatBubbleCard"
-        android:layout_width="180dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:layout_marginTop="17dp"
         android:layout_toStartOf="@id/rightChatImageIcon"
         android:elevation="5dp"
         app:cardCornerRadius="10dp">
 
         <LinearLayout
-            android:padding="5dp"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_margin="15dp">
 
             <TextView
+                android:id="@+id/rightChatTextContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="This is an example text from the right chat icon"
                 android:fontFamily="@font/poppinsregular"
-                android:textSize="13sp"
+                android:textSize="16sp"
 
-                android:id="@+id/rightChatTextContent"
-                />
+                tools:text="This is an example text from the right chat icon" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -43,6 +43,6 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="10dp"
 
-        tools:src="@drawable/narutoicon" />
+        android:src="@drawable/narutoicon" />
 
 </RelativeLayout>
