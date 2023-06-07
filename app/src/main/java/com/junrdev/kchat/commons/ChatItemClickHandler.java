@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.junrdev.kchat.model.User;
 
-public interface ChatItemClickHandler extends View.OnClickListener {
+public interface ChatItemClickHandler {
 
     void handleItemClicked(User user);
 
