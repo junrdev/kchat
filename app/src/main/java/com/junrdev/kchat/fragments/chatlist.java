@@ -115,12 +115,8 @@ public class chatlist extends Fragment {
             public void handleItemClicked(User user) {
 
                 //start activity
+                Navigation.findNavController(requireView()).navigate(R.id.action_chatlist_to_conversationactivity);
                 Toast.makeText(context, " " + user.getUserName(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onClick(View v) {
-
             }
         }));
 

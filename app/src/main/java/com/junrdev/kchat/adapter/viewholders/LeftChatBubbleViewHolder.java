@@ -12,7 +12,7 @@ import com.junrdev.kchat.model.Message;
 
 public class LeftChatBubbleViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView chatContent;
+    public TextView chatContent;
 
     public CardView chatCard;
 

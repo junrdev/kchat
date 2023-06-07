@@ -1,15 +1,29 @@
 package com.junrdev.kchat.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.junrdev.kchat.R;
+import com.junrdev.kchat.adapter.SingleChatItemRecyclerAdapter;
+import com.junrdev.kchat.adapter.TestChatItemsAdapter;
+import com.junrdev.kchat.commons.ChatItemPosition;
+import com.junrdev.kchat.commons.DemoBubble;
 import com.junrdev.kchat.databinding.FragmentConversationactivityBinding;
+import com.junrdev.kchat.model.Message;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,10 +74,34 @@ public class conversationactivity extends Fragment {
 
     private FragmentConversationactivityBinding binding;
 
+
+    private RecyclerView chatsRecycler;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentConversationactivityBinding.inflate(inflater);
+        Context context = binding.getRoot().getContext();
+
+        //custom toolbar
+        Toolbar toolbar = requireActivity().findViewById(R.id.singleChatToolBar);
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
+
+        List<DemoBubble> demoBubbles = new ArrayList<>();
+        demoBubbles.add(new DemoBubble(ChatItemPosition.RIGHT, new Message("Hello world")));
+        demoBubbles.add(new DemoBubble(ChatItemPosition.LEFT, new Message("Hello world this is a long text of a huge size length")));
+        demoBubbles.add(new DemoBubble(ChatItemPosition.RIGHT, new Message("Hello world")));
+        demoBubbles.add(new DemoBubble(ChatItemPosition.LEFT, new Message("Hello world")));
+        demoBubbles.add(new DemoBubble(ChatItemPosition.RIGHT, new Message("Hello world this is a long text of a huge size length")));
+        demoBubbles.add(new DemoBubble(ChatItemPosition.LEFT, new Message("Hello world")));
+
+        //chat view adapter
+        chatsRecycler = binding.singleChatListRecycler;
+        chatsRecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+//        chatsRecycler.setAdapter(new SingleChatItemRecyclerAdapter(demoBubbles, context));
+        chatsRecycler.setAdapter(new TestChatItemsAdapter(context, demoBubbles));
+
+        Log.d("TAG", "onCreateView: "+ demoBubbles.get(0).getMessage().getContent());
 
         return binding.getRoot();
     }

@@ -1,6 +1,7 @@
 package com.junrdev.kchat.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,44 +19,29 @@ import com.junrdev.kchat.model.Message;
 import java.util.List;
 
 public class SingleChatItemRecyclerAdapter extends RecyclerView.Adapter {
-
-    private List<DemoBubble> bubbles;
     private Context context;
+    private List<DemoBubble> bubbles;
 
-
-    private SingleChatItemRecyclerAdapter() {
-    }
-
-
-    public SingleChatItemRecyclerAdapter(List<DemoBubble> bubbles, Context context) {
-        this.bubbles = bubbles;
+    public SingleChatItemRecyclerAdapter(Context context, List<DemoBubble> bubbles) {
         this.context = context;
+        this.bubbles = bubbles;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View leftView = LayoutInflater.from(parent.getContext()).inflate(R.layout.leftchatitem, parent, false);
-        View rightView = LayoutInflater.from(parent.getContext()).inflate(R.layout.leftchatitem, parent, false);
+        View rview = LayoutInflater.from(parent.getContext()).inflate(R.layout.rightchatitem, parent, false);
+        View lview = LayoutInflater.from(parent.getContext()).inflate(R.layout.leftchatitem, parent, false);
 
-        if (viewType == ChatItemPosition.RIGHT.getValue())
-            return new RightChatBubbleViewHolder(rightView);
-        else if (viewType == ChatItemPosition.LEFT.getValue())
-            return new LeftChatBubbleViewHolder(leftView);
-
-        return null;
+        return viewType == ChatItemPosition.RIGHT.getValue() ? new RightChatBubbleViewHolder(rview) : new LeftChatBubbleViewHolder(lview);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-        Message message = bubbles.get(position).getMessage();
-
         if (holder instanceof LeftChatBubbleViewHolder)
-            ((LeftChatBubbleViewHolder) holder).bindCard(message);
-        else if (holder instanceof RightChatBubbleViewHolder)
-            ((RightChatBubbleViewHolder) holder).bindCard(message);
-
+            ((LeftChatBubbleViewHolder) holder).chatContent.setText(bubbles.get(position).getMessage().getContent());
+        else
+            ((RightChatBubbleViewHolder) holder).chatContent.setText(bubbles.get(position).getMessage().getContent());
     }
 
     @Override
@@ -69,3 +55,4 @@ public class SingleChatItemRecyclerAdapter extends RecyclerView.Adapter {
         return bubble.getPosition() == ChatItemPosition.RIGHT ? ChatItemPosition.RIGHT.getValue() : ChatItemPosition.LEFT.getValue();
     }
 }
+

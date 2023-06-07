@@ -1,4 +1,4 @@
-package com.junrdev.kchat.adapter;
+package com.junrdev.kchat.adapter.viewholders;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

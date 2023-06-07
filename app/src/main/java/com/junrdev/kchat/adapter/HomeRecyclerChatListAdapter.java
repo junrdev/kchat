@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.junrdev.kchat.R;
+import com.junrdev.kchat.adapter.viewholders.HomeRecyclerChatListAdapterViewHolder;
 import com.junrdev.kchat.commons.ChatItemClickHandler;
 import com.junrdev.kchat.model.User;
 
