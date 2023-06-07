@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.junrdev.kchat.R;
 import com.junrdev.kchat.databinding.FragmentSignupactivityBinding;
@@ -104,7 +105,7 @@ public class signupactivity extends Fragment {
 
     private LinearLayout signUpLoading;
 
-    private FirebaseDatabase database;
+    private DatabaseReference database;
 
 
     @Override
@@ -130,9 +131,9 @@ public class signupactivity extends Fragment {
         auth = FirebaseAuth.getInstance();
 
         if(database == null)
-            database = FirebaseDatabase.getInstance();
+            database = FirebaseDatabase.getInstance().getReference("users");
 
-        database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance().getReference("users");
 
         signUpLoading = binding.signUpLoading.loginLoading;
 
@@ -180,12 +181,11 @@ public class signupactivity extends Fragment {
         user_data.put("name", username.getText().toString());
         user_data.put("dateJoined", new Date().toString());
 
-        database.getReference("users").setValue(user_data).addOnCompleteListener(v ->{
+        database.child(currentUser.getUid()).updateChildren(user_data).addOnCompleteListener(v ->{
             if (v.isSuccessful()){
-                Snackbar.make(requireView(), "Saved data", Snackbar.LENGTH_SHORT).show();
-//                Toast.makeText(context, "Saved data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Saved data", Toast.LENGTH_SHORT).show();
             }else{
-                Snackbar.make(requireView(), "Failed to Saved data "+ v.getException().getMessage(), Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(context, "Failed to Saved data", Toast.LENGTH_SHORT).show();
             }
         });
 
